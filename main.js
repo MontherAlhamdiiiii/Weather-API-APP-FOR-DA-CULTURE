@@ -7,10 +7,11 @@ let city = document.querySelector(".main h3");
 let both = document.querySelectorAll(".box p:first-of-type");
 
 let img = document.querySelector(".state-img img");
-console.log(img);
+
 
 btn.onclick = async function () {
-  if (input.value !== "") {
+  try{
+    if (input.value !== "") {
     let response = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${input.value}&units=metric&appid=11e87b0a073f706d7ee267df03dcbcbb`,
     );
@@ -21,4 +22,9 @@ btn.onclick = async function () {
     both[1].innerHTML = `${result.wind.speed} km/h`;
     img.src = `images/${result.weather[0].main.toLowerCase()}.png`;
   }
+  }
+  catch(error){
+   console.log(Error(error));
+  }
+  
 };
